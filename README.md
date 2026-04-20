@@ -63,12 +63,12 @@ Quantify the impact of managers on engagement, retention, and team performance �
 
 ---
 
-### [6. Diversity, Equity & Inclusion](./06_Diversity_Equity_Inclusion)
+### [6. Inclusion](./06_Inclusion)
 **What Analytics Solves For:**
-Surface systemic bias in hiring, promotion, pay, and attrition — moving DEI from narrative to measurable outcomes with accountability.
+Surface systemic bias in hiring, promotion, pay, and attrition — moving inclusion from narrative to measurable outcomes with accountability.
 
 **Key Questions:**
-- Where do we lose diverse candidates in hiring?
+- Where do we lose candidates in the hiring funnel?
 - Are promotion rates equitable across demographics?
 - Do pay gaps exist after controlling for role/performance?
 
