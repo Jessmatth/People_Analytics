@@ -255,14 +255,20 @@ def generate_one_on_ones(managers_df, team_members_df):
                     # Weekly or bi-weekly
                     num_meetings = random.choice([2, 4]) if random.random() > 0.1 else random.choice([1, 3])
                     quality_score = random.uniform(7.5, 10.0)
+                    # Career development discussed 25-35% of time for exceptional managers
+                    career_dev_prob = 0.30
                 elif manager['archetype'] == 'Adequate':
                     # Bi-weekly or monthly
                     num_meetings = random.choice([1, 2])
                     quality_score = random.uniform(5.5, 7.5)
+                    # Career development discussed 15-20% of time
+                    career_dev_prob = 0.18
                 else:
                     # Monthly or less
                     num_meetings = random.choice([0, 1])
                     quality_score = random.uniform(2.0, 6.0) if num_meetings > 0 else 0
+                    # Career development discussed 5-10% of time
+                    career_dev_prob = 0.08
 
                 avg_duration = random.randint(20, 45) if num_meetings > 0 else 0
 
@@ -273,7 +279,7 @@ def generate_one_on_ones(managers_df, team_members_df):
                     'num_meetings': num_meetings,
                     'avg_duration_minutes': avg_duration,
                     'quality_score': round(quality_score, 1),
-                    'covered_career_development': random.random() > 0.3 if num_meetings > 0 else False
+                    'covered_career_development': random.random() < career_dev_prob if num_meetings > 0 else False
                 })
 
     return pd.DataFrame(one_on_one_data)
