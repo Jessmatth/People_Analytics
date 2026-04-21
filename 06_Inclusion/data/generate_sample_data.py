@@ -469,11 +469,24 @@ representation_df = pd.DataFrame(representation_data)
 
 print("\nSaving datasets...")
 
-employees_df.to_csv('06_Inclusion/data/employees.csv', index=False)
-hiring_funnel_df.to_csv('06_Inclusion/data/hiring_funnel.csv', index=False)
-promotions_df.to_csv('06_Inclusion/data/promotions.csv', index=False)
-engagement_surveys_df.to_csv('06_Inclusion/data/engagement_surveys.csv', index=False)
-representation_df.to_csv('06_Inclusion/data/representation_by_level.csv', index=False)
+import os
+# Determine the correct path based on where we're running from
+if os.path.exists('../data'):
+    # Running from notebooks directory
+    data_dir = '../data'
+elif os.path.exists('06_Inclusion/data'):
+    # Running from project root
+    data_dir = '06_Inclusion/data'
+else:
+    # Create data directory if it doesn't exist
+    os.makedirs('data', exist_ok=True)
+    data_dir = 'data'
+
+employees_df.to_csv(f'{data_dir}/employees.csv', index=False)
+hiring_funnel_df.to_csv(f'{data_dir}/hiring_funnel.csv', index=False)
+promotions_df.to_csv(f'{data_dir}/promotions.csv', index=False)
+engagement_surveys_df.to_csv(f'{data_dir}/engagement_surveys.csv', index=False)
+representation_df.to_csv(f'{data_dir}/representation_by_level.csv', index=False)
 
 print(f"\n{'='*80}")
 print("DATA GENERATION COMPLETE")
@@ -483,7 +496,7 @@ print(f"Generated {len(hiring_funnel_df)} hiring funnel records")
 print(f"Generated {len(promotions_df)} promotion records")
 print(f"Generated {len(engagement_surveys_df)} engagement survey responses")
 print(f"Generated {len(representation_df)} representation data points")
-print(f"\nDatasets saved to 06_Inclusion/data/")
+print(f"\nDatasets saved to {data_dir}/")
 print(f"{'='*80}")
 
 # Print summary statistics
