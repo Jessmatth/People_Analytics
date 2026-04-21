@@ -65,21 +65,22 @@ for i in range(NUM_EMPLOYEES):
     manager_support = np.random.beta(5, 2)  # 0-1 scale
 
     # Training completion
-    completed_training = random.random() < 0.65  # 65% completed training
+    completed_training = random.random() < 0.55  # 55% completed training
 
     # Adoption status (influenced by tech comfort, manager support, training)
-    adoption_score = (tech_comfort / 5) * 0.4 + manager_support * 0.3 + (0.3 if completed_training else 0)
-    adoption_score += np.random.normal(0, 0.1)
+    # Adjusted formula to create more realistic adoption rates (~70% overall)
+    adoption_score = (tech_comfort / 5) * 0.35 + manager_support * 0.35 + (0.15 if completed_training else 0)
+    adoption_score += np.random.normal(0, 0.15)  # Increased variance
     adoption_score = np.clip(adoption_score, 0, 1)
 
-    # Classify adoption level
-    if adoption_score > 0.7:
+    # Classify adoption level (adjusted thresholds for realistic distribution)
+    if adoption_score > 0.75:
         adoption_level = 'Power User'
         weekly_usage_hours = np.random.uniform(8, 15)
-    elif adoption_score > 0.4:
+    elif adoption_score > 0.55:
         adoption_level = 'Casual User'
         weekly_usage_hours = np.random.uniform(2, 8)
-    elif adoption_score > 0.2:
+    elif adoption_score > 0.35:
         adoption_level = 'Minimal User'
         weekly_usage_hours = np.random.uniform(0.5, 2)
     else:
@@ -162,8 +163,8 @@ for week in range(WEEKS_TRACKED):
         elif emp['adoption_level'] == 'Minimal User':
             hours = emp['weekly_usage_hours'] * np.random.uniform(0.5, 1.5)
         else:
-            # Non-adopters occasionally try
-            hours = np.random.choice([0, 0, 0, 0.5, 1])
+            # Non-adopters rarely try (only 10% of the time)
+            hours = np.random.choice([0, 0, 0, 0, 0, 0, 0, 0, 0, 0.5])
 
         weekly_usage_data.append({
             'employee_id': emp['employee_id'],
