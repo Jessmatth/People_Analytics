@@ -87,23 +87,28 @@ for i in range(NUM_EMPLOYEES):
         adoption_level = 'Non-Adopter'
         weekly_usage_hours = 0
 
-    # Performance rating
-    performance_rating = np.random.beta(5, 2) * 4 + 1
-    performance_rating = np.clip(performance_rating, 1, 5)
-
-    # Productivity impact (correlated with adoption)
+    # Productivity impact (correlated with adoption) - more realistic levels
     if adoption_level == 'Power User':
-        time_saved_hours_per_week = np.random.uniform(5, 10)
-        productivity_improvement = np.random.uniform(0.25, 0.40)  # 25-40%
-    elif adoption_level == 'Casual User':
         time_saved_hours_per_week = np.random.uniform(2, 5)
-        productivity_improvement = np.random.uniform(0.10, 0.25)  # 10-25%
+        productivity_improvement = np.random.uniform(0.08, 0.18)  # 8-18%
+        performance_boost = 0.3  # AI helps performance
+    elif adoption_level == 'Casual User':
+        time_saved_hours_per_week = np.random.uniform(1, 3)
+        productivity_improvement = np.random.uniform(0.04, 0.10)  # 4-10%
+        performance_boost = 0.15
     elif adoption_level == 'Minimal User':
-        time_saved_hours_per_week = np.random.uniform(0.5, 2)
-        productivity_improvement = np.random.uniform(0.02, 0.10)  # 2-10%
+        time_saved_hours_per_week = np.random.uniform(0.3, 1)
+        productivity_improvement = np.random.uniform(0.01, 0.05)  # 1-5%
+        performance_boost = 0.05
     else:
         time_saved_hours_per_week = 0
         productivity_improvement = 0
+        performance_boost = 0
+
+    # Performance rating (influenced by AI adoption, but not perfectly)
+    base_performance = np.random.beta(5, 2) * 4 + 1
+    performance_rating = base_performance + performance_boost
+    performance_rating = np.clip(performance_rating, 1, 5)
 
     # Barriers (for non/low adopters)
     barriers = []
