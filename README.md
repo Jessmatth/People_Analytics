@@ -117,11 +117,6 @@ Each domain folder contains:
 - Survey: Qualtrics, Culture Amp, Glint
 - Analytics: Tableau, Power BI, Python, R
 
-**Communities:**
-- [People Analytics LinkedIn Group](https://www.linkedin.com/groups/4854305/)
-- [AIHR Academy](https://www.aihr.com/)
-- [Insight222](https://www.insight222.com/)
-
 ---
 
 ## Ethics & Privacy
